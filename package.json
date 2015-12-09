@@ -1,0 +1,17 @@
+{
+  "name": "t2-project",
+  "version": "0.0.0",
+  "description": "Build a project for deployment to a Tessel 2",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "cd eg/project-uses-socket-io; npm install; cd ../../; npm test",
+    "test": "node test/smoke/index.js"
+  },
+  "author": "Rick Waldron",
+  "license": "MIT",
+  "dependencies": {
+    "array-includes": "^3.0.1",
+    "builtins": "^1.0.3",
+    "module-deps": "^4.0.2"
+  }
+}
