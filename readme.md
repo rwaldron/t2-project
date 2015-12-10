@@ -18,17 +18,7 @@ npm install t2-project
 ```
 
 ```js
-var Project = require("t2-project");
-
-var a = new Project({
-  entry: './eg/project-uses-socket-io/index.js',
-});
-
-a.collect(function(error, entries) {
-  console.log('DONE: a', entries.length);
-  entries.forEach(entry => console.log(entry.file));
-});
-
+var Project = require('t2-project');
 
 var b = new Project({
   entry: './eg/project-simple/index.js',
