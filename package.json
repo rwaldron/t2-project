@@ -8,8 +8,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "postinstall": "cd eg/project-uses-socket-io; npm install; cd eg/project-simple; npm install; cd ../../; npm test",
-    "test": "node test/smoke/index.js"
+    "test": "cd eg/project-simple; npm install; cd ../../; node test/smoke/index.js"
   },
   "author": "Rick Waldron",
   "license": "MIT",
