@@ -1,12 +1,65 @@
 # t2-project
 
-Given a specified entry point file, determine and resolve the dependency graph. The resulting output is an array of data objects containing the following properties: 
+Given a specified entry point file, determine and resolve the dependency graph. 
+
+## Dependencies
+
+The resulting output is an array of data objects containing the following properties: 
 
 | Name | Description |
 | ---- | ----------- |
 | id | Unique file identity |
 | file | Absolute path to file |
 | source | The contents of the file |
+
+
+For example, the following program: 
+
+```js
+var Project = require('t2-project');
+
+var project = new Project({
+  entry: 'eg/project-conditional/index.js',
+});
+
+project.exclude(['b.js']);
+project.exclude(['c.*']);
+
+project.collect((error, entries) => console.log(entries));
+```
+
+Where `eg/project-conditional/` contains: 
+
+```
+.
+├── a.js
+├── b.js
+├── c.js
+└── index.js
+
+0 directories, 4 files
+```
+
+Would have the following result (just assume `${ABSOLUTE_PATH}` is the absolute path to `project-conditional`):
+
+```
+[{
+  id: '${ABSOLUTE_PATH}/eg/project-conditional/a.js',
+  source: 'module.exports = function() {\n  return \'a\';\n};\n',
+  deps: {},
+  file: '${ABSOLUTE_PATH}/eg/project-conditional/a.js'
+}, {
+  file: '${ABSOLUTE_PATH}/eg/project-conditional/index.js',
+  entry: true,
+  id: '${ABSOLUTE_PATH}/eg/project-conditional/index.js',
+  source: 'var conditional = true ? require(\'./a\') : require(\'./b\');\n\nrequire(\'./c\');\n\n\nconsole.log(conditional());\n',
+  deps: {
+    './b': '${ABSOLUTE_PATH}/eg/project-conditional/b.js',
+    './c': '${ABSOLUTE_PATH}/eg/project-conditional/c.js',
+    './a': '${ABSOLUTE_PATH}/eg/project-conditional/a.js'
+  }
+}]
+```
 
 
 ## Usage
