@@ -1,6 +1,7 @@
 exports['Project.prototype.collect'] = {
   setUp: function(done) {
     this.sandbox = sinon.sandbox.create();
+    this.globSync = this.sandbox.spy(glob, 'sync');
     this.project = new Project({
       entry: path.join(process.cwd(), 'eg/project-conditional/index.js'),
     });
@@ -28,7 +29,7 @@ exports['Project.prototype.collect'] = {
 
   acceptsCallback: function(test) {
     test.expect(5);
-    this.project.collect(function(error, entries) {
+    this.project.collect((error, entries) => {
 
       test.equal(error, null);
 
@@ -41,11 +42,16 @@ exports['Project.prototype.collect'] = {
   },
 
   removesExcludedFiles: function(test) {
-    test.expect(6);
+    test.expect(11);
 
     this.project.exclude(['b.js', 'c.js']);
 
-    this.project.collect(function(error, entries) {
+    this.project.collect((error, entries) => {
+      test.equal(this.globSync.callCount, 4);
+      test.equal(this.globSync.getCall(0).args[0], 'b.js');
+      test.equal(this.globSync.getCall(1).args[0], '/b.js');
+      test.equal(this.globSync.getCall(2).args[0], 'c.js');
+      test.equal(this.globSync.getCall(3).args[0], '/c.js');
 
       test.equal(error, null);
       test.equal(entries.length, 2);
@@ -80,7 +86,7 @@ exports['Project.prototype.collect with node_modules'] = {
   providesPackageJson: function(test) {
     test.expect(6);
 
-    this.project.collect(function(error, entries) {
+    this.project.collect((error, entries) => {
 
       test.equal(error, null);
 

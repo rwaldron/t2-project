@@ -23,6 +23,7 @@
     "sinon": true,
     "Project": true,
     "path": true,
-    "Dependencies": true
+    "Dependencies": true,
+    "glob": true
   }
 }
