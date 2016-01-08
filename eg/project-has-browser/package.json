@@ -2,8 +2,9 @@
   "name": "project-simple",
   "version": "1.0.0",
   "description": "",
-  "browser": "./wrong.js",
-  "dependencies": {},
+  "dependencies": {
+    "engine.io-parser":"1.2.4"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

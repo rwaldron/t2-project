@@ -122,32 +122,30 @@ exports['Project.prototype.collect does not resolve "browser" key in package.jso
   },
 
   browserDoesNotResolveToMain: function(test) {
-    test.expect(8);
-
-    var packageJson = require(path.join(__dirname, '../../eg/project-has-browser/package.json'));
-
-    test.equal(packageJson.main, undefined);
-    test.equal(packageJson.browser, './wrong.js');
+    test.expect(12);
 
     this.project.collect((error, entries) => {
 
       test.equal(error, null);
 
       var expected = [
-        '/package.json',
-        '/index.js',
+        'project-has-browser/package.json',
+        'project-has-browser/node_modules/engine.io-parser/package.json',
+        'project-has-browser/node_modules/engine.io-parser/lib/keys.js',
+        'project-has-browser/node_modules/engine.io-parser/node_modules/utf8/package.json',
+        'project-has-browser/node_modules/engine.io-parser/node_modules/after/package.json',
+        'project-has-browser/node_modules/engine.io-parser/node_modules/utf8/utf8.js',
+        'project-has-browser/node_modules/engine.io-parser/node_modules/after/index.js',
+        'project-has-browser/node_modules/engine.io-parser/lib/index.js',
+        'project-has-browser/node_modules/engine.io-parser/index.js',
+        'project-has-browser/index.js',
       ];
-      test.equal(entries.length, 2);
+      test.equal(entries.length, expected.length);
 
       expected.forEach((name) => {
         test.ok(entries.find(entry => entry.id.endsWith(name)), name);
       });
 
-      packageJson = JSON.parse(entries.find(entry => entry.file.endsWith('package.json')).source);
-
-      // "main" is not populated by the contents of "browser"
-      test.equal(packageJson.main, undefined);
-      test.equal(packageJson.browser, './wrong.js');
       test.done();
     });
   },
