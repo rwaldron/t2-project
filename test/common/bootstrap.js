@@ -3,6 +3,7 @@ global.IS_TEST_ENV = true;
 
 // Built-ins
 global.Emitter = require('events').EventEmitter;
+global.fs = require('fs');
 global.path = require('path');
 
 // 3rd Party

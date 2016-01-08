@@ -24,6 +24,7 @@
     "Project": true,
     "path": true,
     "Dependencies": true,
-    "glob": true
+    "glob": true,
+    "fs": true
   }
 }

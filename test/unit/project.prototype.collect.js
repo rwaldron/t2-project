@@ -106,3 +106,49 @@ exports['Project.prototype.collect with node_modules'] = {
     });
   },
 };
+
+exports['Project.prototype.collect does not resolve "browser" key in package.json'] = {
+  setUp: function(done) {
+    this.sandbox = sinon.sandbox.create();
+    this.project = new Project({
+      entry: path.join(process.cwd(), 'eg/project-has-browser/index.js'),
+    });
+    done();
+  },
+
+  tearDown: function(done) {
+    this.sandbox.restore();
+    done();
+  },
+
+  browserDoesNotResolveToMain: function(test) {
+    test.expect(8);
+
+    var packageJson = require(path.join(__dirname, '../../eg/project-has-browser/package.json'));
+
+    test.equal(packageJson.main, undefined);
+    test.equal(packageJson.browser, './wrong.js');
+
+    this.project.collect((error, entries) => {
+
+      test.equal(error, null);
+
+      var expected = [
+        '/package.json',
+        '/index.js',
+      ];
+      test.equal(entries.length, 2);
+
+      expected.forEach((name) => {
+        test.ok(entries.find(entry => entry.id.endsWith(name)), name);
+      });
+
+      packageJson = JSON.parse(entries.find(entry => entry.file.endsWith('package.json')).source);
+
+      // "main" is not populated by the contents of "browser"
+      test.equal(packageJson.main, undefined);
+      test.equal(packageJson.browser, './wrong.js');
+      test.done();
+    });
+  },
+};
