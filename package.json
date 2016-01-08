@@ -1,6 +1,6 @@
 {
   "name": "t2-project",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Build a project for deployment to a Tessel 2",
   "repository": {
     "type": "git",
