@@ -1,5 +1,7 @@
 # t2-project
 
+[![Travis Build Status](https://travis-ci.org/rwaldron/t2-project.svg?branch=master)](https://travis-ci.org/rwaldron/t2-project) 
+
 Given a specified entry point file, determine and resolve the dependency graph. 
 
 ## Dependencies

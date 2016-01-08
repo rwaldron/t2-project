@@ -10,7 +10,9 @@ c.collect((error, entries) => {
 
     if (entry.file.endsWith('package.json')) {
       evaluated = JSON.parse(entry.source);
-      console.log(evaluated);
+      if (evaluated.main) {
+        console.log('ERROR: "browser" field should not exist here.');
+      }
     }
   });
 });

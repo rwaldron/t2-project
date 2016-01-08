@@ -5,7 +5,7 @@ var a = new Project({
 });
 
 a.collect((error, entries) => {
-  console.log('DONE: a', entries.length);
+  console.log('CALLBACK: a', entries.length);
   entries.forEach(entry => console.log(entry.file));
 });
 
