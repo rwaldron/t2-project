@@ -69,6 +69,38 @@ exports['Project.prototype.collect'] = {
   },
 };
 
+
+exports['Project.prototype.collect Collates Package.json'] = {
+  setUp: function(done) {
+    this.sandbox = sinon.sandbox.create();
+    this.globSync = this.sandbox.spy(glob, 'sync');
+    this.project = new Project({
+      entry: path.join(process.cwd(), 'eg/project-has-browser/index.js'),
+    });
+    done();
+  },
+
+  tearDown: function(done) {
+    this.sandbox.restore();
+    done();
+  },
+
+  collatesPackageJson: function(test) {
+    test.expect(10);
+    var expect = [
+      'project-simple',
+      'engine.io-parser',
+      'after',
+      'utf8',
+    ];
+    this.project.collect((error, entries) => {
+      entries.forEach(entry => test.ok(expect.includes(entry.packageName)));
+      test.done();
+    });
+  },
+
+};
+
 exports['Project.prototype.collect with node_modules'] = {
   setUp: function(done) {
     this.sandbox = sinon.sandbox.create();
