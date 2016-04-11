@@ -51,17 +51,32 @@ exports['Project'] = {
     test.done();
   },
 
-  main: function(test) {
+  mainInferred: function(test) {
     test.expect(2);
     test.equal(this.project.main.startsWith(process.cwd()), true);
     test.equal(this.project.main.endsWith(path.normalize('eg/project-simple/index.js')), true);
     test.done();
   },
 
-  dirname: function(test) {
+  dirnameInferred: function(test) {
     test.expect(2);
     test.equal(this.project.dirname.startsWith(process.cwd()), true);
     test.equal(this.project.dirname.endsWith(path.normalize('eg/project-simple')), true);
+    test.done();
+  },
+
+  dirnameExplicit: function(test) {
+    test.expect(2);
+
+    var dirname = path.join(process.cwd(), 'eg/project-simple/');
+
+    this.project = new Project({
+      entry: path.join(process.cwd(), 'eg/project-simple/example/index.js'),
+      dirname: dirname,
+    });
+
+    test.equal(this.project.main.startsWith(process.cwd()), true);
+    test.equal(this.project.dirname, dirname);
     test.done();
   },
 
