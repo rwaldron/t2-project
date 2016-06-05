@@ -1,6 +1,9 @@
 # t2-project
 
-[![Travis Build Status](https://travis-ci.org/rwaldron/t2-project.svg?branch=master)](https://travis-ci.org/rwaldron/t2-project) 
+[![Travis-CI Build Status](https://travis-ci.org/rwaldron/t2-project.svg?branch=master)](https://travis-ci.org/rwaldron/t2-project) 
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/5jc8y0v8qh59amaq/branch/master?svg=true)](https://ci.appveyor.com/project/rwaldron/t2-project/branch/master)
+
+
 
 Given a specified entry point file, determine and resolve the dependency graph. 
 
