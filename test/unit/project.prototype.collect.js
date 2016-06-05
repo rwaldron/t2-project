@@ -127,7 +127,7 @@ exports['Project.prototype.collect with node_modules'] = {
         '/node_modules/math-euler/package.json',
         '/node_modules/math-euler/euler.js',
         '/index.js',
-      ];
+      ].map(path.normalize);
 
       test.equal(entries.length, 4);
 
@@ -171,7 +171,7 @@ exports['Project.prototype.collect does not resolve "browser" key in package.jso
         'project-has-browser/node_modules/engine.io-parser/lib/index.js',
         'project-has-browser/node_modules/engine.io-parser/index.js',
         'project-has-browser/index.js',
-      ];
+      ].map(path.normalize);
       test.equal(entries.length, expected.length);
 
       expected.forEach((name) => {

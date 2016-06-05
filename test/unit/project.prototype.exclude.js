@@ -15,18 +15,22 @@ exports['Project.prototype.exclude'] = {
   excludeSingleFile: function(test) {
     test.expect(1);
 
+    var expected = ['a.js', '/a.js'].map(path.normalize);
+
     this.project.exclude('a.js');
 
-    test.deepEqual(this.project.excluded, ['a.js', '/a.js']);
+    test.deepEqual(this.project.excluded, expected);
     test.done();
   },
 
   excludeMultipleFiles: function(test) {
     test.expect(1);
 
+    var expected = ['a.js', '/a.js', 'b.js', '/b.js'].map(path.normalize);
+
     this.project.exclude(['a.js', 'b.js']);
 
-    test.deepEqual(this.project.excluded, ['a.js', '/a.js', 'b.js', '/b.js']);
+    test.deepEqual(this.project.excluded, expected);
     test.done();
   },
 
