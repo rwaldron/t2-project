@@ -23,7 +23,7 @@ before_test:
   - npm install -g grunt-cli
 
 test_script:
-  - ps: "grunt test # PowerShell"
+  # - ps: "grunt test # PowerShell"
   - cmd: grunt test
 
 cache:
