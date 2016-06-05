@@ -33,14 +33,16 @@ exports['Project.prototype.exclude'] = {
   excludeOptions: function(test) {
     test.expect(1);
 
+    var expected = [
+      'a.js', '/../../t2-project/a.js', 'b.js', '/../../t2-project/b.js'
+    ].map(path.normalize);
+
     this.project.exclude({
       files: ['a.js', 'b.js'],
       basedir: '../eg/project-simple'
     });
 
-    test.deepEqual(this.project.excluded, [
-      'a.js', '/../../t2-project/a.js', 'b.js', '/../../t2-project/b.js'
-    ]);
+    test.deepEqual(this.project.excluded, expected);
     test.done();
   },
 
