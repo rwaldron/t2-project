@@ -129,8 +129,8 @@ exports['Project.prototype.collect with node_modules'] = {
         '/index.js',
       ].map(path.normalize);
 
-console.log('expected', expected);
-console.log('entries', entries);
+      // console.log('expected', expected);
+      // console.log('entries', entries);
       test.equal(entries.length, 4);
 
       expected.forEach((name) => {
