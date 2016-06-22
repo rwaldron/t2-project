@@ -7,9 +7,6 @@
     "url": "https://github.com/rwaldron/t2-project.git"
   },
   "main": "lib/index.js",
-  "scripts": {
-    "postinstall": "node install-examples-modules.js"
-  },
   "author": "Rick Waldron",
   "license": "MIT",
   "dependencies": {
