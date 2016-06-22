@@ -123,10 +123,10 @@ exports['Project.prototype.collect with node_modules'] = {
       test.equal(error, null);
 
       var expected = [
-        '/package.json',
-        '/node_modules/math-euler/package.json',
-        '/node_modules/math-euler/euler.js',
-        '/index.js',
+        'package.json',
+        'node_modules/math-euler/package.json',
+        'node_modules/math-euler/euler.js',
+        'index.js',
       ].map(path.normalize);
 
       // console.log('expected', expected);
@@ -163,19 +163,18 @@ exports['Project.prototype.collect does not resolve "browser" key in package.jso
       test.equal(error, null);
 
       var expected = [
-        'project-has-browser/package.json',
-        'project-has-browser/node_modules/engine.io-parser/package.json',
-        'project-has-browser/node_modules/engine.io-parser/lib/keys.js',
-        'project-has-browser/node_modules/engine.io-parser/node_modules/utf8/package.json',
-        'project-has-browser/node_modules/engine.io-parser/node_modules/after/package.json',
-        'project-has-browser/node_modules/engine.io-parser/node_modules/utf8/utf8.js',
-        'project-has-browser/node_modules/engine.io-parser/node_modules/after/index.js',
-        'project-has-browser/node_modules/engine.io-parser/lib/index.js',
-        'project-has-browser/node_modules/engine.io-parser/index.js',
-        'project-has-browser/index.js',
+        'package.json',
+        'engine.io-parser/package.json',
+        'engine.io-parser/lib/keys.js',
+        'utf8/package.json',
+        'after/package.json',
+        'utf8/utf8.js',
+        'after/index.js',
+        'engine.io-parser/lib/index.js',
+        'engine.io-parser/index.js',
+        'index.js',
       ].map(path.normalize);
 
-      console.log(expected);
       test.equal(entries.length, expected.length);
 
       expected.forEach((name) => {
