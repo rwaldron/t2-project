@@ -5,7 +5,7 @@ var a = new Project({
 });
 
 a.collect((error, entries) => {
-  console.log('CALLBACK: a', entries.length);
+  console.log('CALLBACK: a', entries.length === 4 ? 'PASS' : 'FAIL');
   entries.forEach(entry => console.log(entry.file));
 });
 
@@ -30,11 +30,11 @@ b.exclude({
 */
 
 var p = b.collect((error, entries) => {
-  console.log('CALLBACK: b', entries.length);
+  console.log('CALLBACK: b', entries.length === 2 ? 'PASS' : 'FAIL');
   entries.forEach(entry => console.log(entry));
 });
 
 p.then(entries => {
-  console.log('RESOLVED: b', entries.length);
+  console.log('RESOLVED: b', entries.length === 2 ? 'PASS' : 'FAIL');
   entries.forEach(entry => console.log(entry.file));
 });

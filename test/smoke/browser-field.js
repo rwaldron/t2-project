@@ -18,9 +18,9 @@ var expected = [
 ];
 c.collect((error, entries) => {
   console.log('CALLBACK: c');
-  console.log(expected.length === entries.length);
+  console.log(expected.length === entries.length ? 'PASS' : 'FAIL');
 
-  expected.forEach((name) => {
-    console.log(entries.find(entry => entry.id.endsWith(name)), name);
-  });
+  // expected.forEach((name) => {
+  //   console.log(entries.find(entry => entry.id.endsWith(name)), name);
+  // });
 });
