@@ -1,6 +1,8 @@
 var cp = require("child_process");
 var path = require("path");
 
+console.log("process.cwd()", process.cwd());
+
 Promise.all([
   "eg/project-simple",
   "eg/project-filtering",
