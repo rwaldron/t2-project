@@ -10,7 +10,7 @@ Promise.all([
 ].reduce((accum, egpath) => {
   accum.push(
     new Promise((resolve, reject) => {
-      cp.exec(`cd ${path.join(process.cwd(), egpath)}; npm install;`, (error) => {
+      cp.exec(`cd ${path.join(process.cwd(), egpath)} && npm install`, (error) => {
         if (error) {
           return reject(error);
         }
