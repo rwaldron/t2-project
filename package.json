@@ -8,7 +8,7 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "test": "cd eg/project-simple; npm install; cd ../../; cd eg/project-has-browser; npm install; cd ../../;  node test/smoke/index.js && grunt"
+    "test": "cd eg/project-simple; npm install; cd ./; cd eg/project-has-browser; npm install; cd ./;  node test/smoke/index.js && grunt"
   },
   "author": "Rick Waldron",
   "license": "MIT",

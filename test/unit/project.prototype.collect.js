@@ -49,9 +49,9 @@ exports['Project.prototype.collect'] = {
     this.project.collect((error, entries) => {
       test.equal(this.globSync.callCount, 4);
       test.equal(this.globSync.getCall(0).args[0], 'b.js');
-      test.equal(this.globSync.getCall(1).args[0], '/b.js');
+      test.equal(this.globSync.getCall(1).args[0], path.normalize('/b.js'));
       test.equal(this.globSync.getCall(2).args[0], 'c.js');
-      test.equal(this.globSync.getCall(3).args[0], '/c.js');
+      test.equal(this.globSync.getCall(3).args[0], path.normalize('/c.js'));
 
       test.equal(error, null);
       test.equal(entries.length, 2);
@@ -174,6 +174,8 @@ exports['Project.prototype.collect does not resolve "browser" key in package.jso
         'project-has-browser/node_modules/engine.io-parser/index.js',
         'project-has-browser/index.js',
       ].map(path.normalize);
+
+      console.log(expected);
       test.equal(entries.length, expected.length);
 
       expected.forEach((name) => {
