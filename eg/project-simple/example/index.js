@@ -1,2 +1,2 @@
-var main = require('../index');
+const main = require('../index');
 console.log(main());

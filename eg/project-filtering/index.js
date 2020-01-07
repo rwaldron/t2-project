@@ -7,4 +7,4 @@
   This doesn't belong in "project-conditional"
   because it's specifically testing filter semantics.
 */
-var conditional = false ? require('sys') : require('util');
+const conditional = false ? require('sys') : require('util');

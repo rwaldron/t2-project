@@ -1,21 +1,21 @@
 exports['Project.prototype.exclude'] = {
-  setUp: function(done) {
-    this.sandbox = sinon.sandbox.create();
+  setUp(done) {
+    this.sandbox = sinon.createSandbox();
     this.project = new Project({
       entry: path.join(process.cwd(), 'eg/project-simple/index.js'),
     });
     done();
   },
 
-  tearDown: function(done) {
+  tearDown(done) {
     this.sandbox.restore();
     done();
   },
 
-  excludeSingleFile: function(test) {
+  excludeSingleFile(test) {
     test.expect(1);
 
-    var expected = ['a.js', '/a.js'].map(path.normalize);
+    const expected = ['a.js', '/a.js'].map(path.normalize);
 
     this.project.exclude('a.js');
 
@@ -23,10 +23,10 @@ exports['Project.prototype.exclude'] = {
     test.done();
   },
 
-  excludeMultipleFiles: function(test) {
+  excludeMultipleFiles(test) {
     test.expect(1);
 
-    var expected = ['a.js', '/a.js', 'b.js', '/b.js'].map(path.normalize);
+    const expected = ['a.js', '/a.js', 'b.js', '/b.js'].map(path.normalize);
 
     this.project.exclude(['a.js', 'b.js']);
 
@@ -34,10 +34,10 @@ exports['Project.prototype.exclude'] = {
     test.done();
   },
 
-  excludeOptions: function(test) {
+  excludeOptions(test) {
     test.expect(4);
 
-    var expected = [
+    const expected = [
       'a.js', '/../../t2-project/a.js', 'b.js', '/../../t2-project/b.js'
     ].map(path.normalize);
 
@@ -46,7 +46,7 @@ exports['Project.prototype.exclude'] = {
       basedir: path.normalize('../eg/project-simple')
     });
 
-    var excluded = this.project.excluded;
+    const excluded = this.project.excluded;
 
     expected.forEach((name) => {
       test.ok(excluded.find(entry => entry.endsWith(name)), name);

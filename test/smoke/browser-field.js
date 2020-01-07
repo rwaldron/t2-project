@@ -1,10 +1,10 @@
-var Project = require('../../');
+const Project = require('../../');
 
-var c = new Project({
+const c = new Project({
   entry: './eg/project-has-browser/index.js',
 });
 
-var expected = [
+const expected = [
   'project-has-browser/package.json',
   'project-has-browser/node_modules/engine.io-parser/package.json',
   'project-has-browser/node_modules/engine.io-parser/lib/keys.js',
@@ -16,9 +16,11 @@ var expected = [
   'project-has-browser/node_modules/engine.io-parser/index.js',
   'project-has-browser/index.js',
 ];
-c.collect((error, entries) => {
+c.collect((error, {
+  length
+}) => {
   console.log('CALLBACK: c');
-  console.log(expected.length === entries.length ? 'PASS' : 'FAIL');
+  console.log(expected.length === length ? 'PASS' : 'FAIL');
 
   // expected.forEach((name) => {
   //   console.log(entries.find(entry => entry.id.endsWith(name)), name);

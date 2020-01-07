@@ -1,4 +1,4 @@
-var conditional = true ? require('./a') : require('./b');
+const conditional = true ? require('./a') : require('./b');
 
 require('./c');
 

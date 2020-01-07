@@ -1,15 +1,17 @@
-var Project = require('../../');
+const Project = require('../../');
 
-var a = new Project({
+const a = new Project({
   entry: './eg/project-simple/index.js',
 });
 
 a.collect((error, entries) => {
   console.log('CALLBACK: a', entries.length === 4 ? 'PASS' : 'FAIL');
-  entries.forEach(entry => console.log(entry.file));
+  entries.forEach(({
+    file
+  }) => console.log(file));
 });
 
-var b = new Project({
+const b = new Project({
   entry: './eg/project-conditional/index.js',
 });
 
@@ -29,12 +31,14 @@ b.exclude({
 });
 */
 
-var p = b.collect((error, entries) => {
+const p = b.collect((error, entries) => {
   console.log('CALLBACK: b', entries.length === 2 ? 'PASS' : 'FAIL');
   entries.forEach(entry => console.log(entry));
 });
 
 p.then(entries => {
   console.log('RESOLVED: b', entries.length === 2 ? 'PASS' : 'FAIL');
-  entries.forEach(entry => console.log(entry.file));
+  entries.forEach(({
+    file
+  }) => console.log(file));
 });

@@ -1,18 +1,18 @@
 exports['Project'] = {
-  setUp: function(done) {
-    this.sandbox = sinon.sandbox.create();
+  setUp(done) {
+    this.sandbox = sinon.createSandbox();
     this.project = new Project({
       entry: path.join(process.cwd(), 'eg/project-simple/index.js'),
     });
     done();
   },
 
-  tearDown: function(done) {
+  tearDown(done) {
     this.sandbox.restore();
     done();
   },
 
-  missingOptions: function(test) {
+  missingOptions(test) {
     test.expect(1);
     test.throws(() => {
       new Project();
@@ -20,7 +20,7 @@ exports['Project'] = {
     test.done();
   },
 
-  missingEntry: function(test) {
+  missingEntry(test) {
     test.expect(1);
     test.throws(() => {
       new Project({});
@@ -28,7 +28,7 @@ exports['Project'] = {
     test.done();
   },
 
-  invalidEntry: function(test) {
+  invalidEntry(test) {
     test.expect(3);
     test.throws(() => {
       new Project({
@@ -51,28 +51,28 @@ exports['Project'] = {
     test.done();
   },
 
-  mainInferred: function(test) {
+  mainInferred(test) {
     test.expect(2);
     test.equal(this.project.main.startsWith(process.cwd()), true);
     test.equal(this.project.main.endsWith(path.normalize('eg/project-simple/index.js')), true);
     test.done();
   },
 
-  dirnameInferred: function(test) {
+  dirnameInferred(test) {
     test.expect(2);
     test.equal(this.project.dirname.startsWith(process.cwd()), true);
     test.equal(this.project.dirname.endsWith(path.normalize('eg/project-simple')), true);
     test.done();
   },
 
-  dirnameExplicit: function(test) {
+  dirnameExplicit(test) {
     test.expect(2);
 
-    var dirname = path.join(process.cwd(), 'eg/project-simple/');
+    const dirname = path.join(process.cwd(), 'eg/project-simple/');
 
     this.project = new Project({
       entry: path.join(process.cwd(), 'eg/project-simple/example/index.js'),
-      dirname: dirname,
+      dirname,
     });
 
     test.equal(this.project.main.startsWith(process.cwd()), true);
@@ -80,7 +80,7 @@ exports['Project'] = {
     test.done();
   },
 
-  deps: function(test) {
+  deps(test) {
     test.expect(4);
     test.equal(this.project.deps instanceof Dependencies, true);
     test.equal(this.project.deps.options.ignoreMissing, true);

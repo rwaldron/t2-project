@@ -7,8 +7,6 @@ global.fs = require('fs');
 global.path = require('path');
 
 // 3rd Party
-require('array-includes').shim();
-
 global.builtins = require('builtins');
 global.Dependencies = require('module-deps');
 global.glob = require('glob');
