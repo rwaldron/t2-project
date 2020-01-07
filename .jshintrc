@@ -1,4 +1,5 @@
 {
+  "esversion": 8,
   "loopfunc": true,
   "laxcomma": true,
   "curly": true,
@@ -13,7 +14,6 @@
   "eqnull": true,
   "node": true,
   "strict": false,
-  "esnext": true,
   "unused": true,
   "globals": {
     "exports": true,
