@@ -5,9 +5,9 @@ os:
   - osx
 
 node_js:
-  - "4"
-  - "5"
-  - "6"
+  - 8
+  - 10
+  - 12
 
 before_install:
   - npm install -g grunt-cli
